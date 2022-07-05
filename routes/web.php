@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +21,12 @@ Route::get('/', function () {
 
 Route::get('/greeting', function () {
     return 'Hello Andrey!!!!!!';
+});
+Route::get('/db', function () {
+    try {
+        \DB::connection()->getPDO();
+        echo \DB::connection()->getDatabaseName();
+    } catch (\Exception $e) {
+        echo 'None';
+    }
 });
