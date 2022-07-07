@@ -19,7 +19,7 @@ Route::get('/', function () {
 })
 ;
 
-Route::get('/greeting', function () {
+Route::get('/priv', function () {
     return 'Hello Andrey!!!!!!';
 });
 Route::get('/db', function () {
