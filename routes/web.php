@@ -30,3 +30,7 @@ Route::get('/db', function () {
         echo 'None';
     }
 });
+Route::get('/posts', function () {
+    return view('posts');
+})
+;
