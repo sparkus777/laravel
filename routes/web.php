@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 
@@ -19,9 +19,6 @@ Route::get('/', function () {
 })
 ;
 
-Route::get('/priv', function () {
-    return 'Hello Andrey!!!!!!';
-});
 Route::get('/db', function () {
     try {
         \DB::connection()->getPDO();
@@ -30,7 +27,4 @@ Route::get('/db', function () {
         echo 'None';
     }
 });
-Route::get('/posts', function () {
-    return view('posts');
-})
-;
+Route::get('/posts',[MainController::class,'posts']);
