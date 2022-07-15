@@ -27,4 +27,6 @@ Route::get('/db', function () {
         echo 'None';
     }
 });
-Route::get('/posts',[MainController::class,'posts']);
+Route::get('/posts',[MainController::class,'posts'])->name('posts');
+Route::get('/create',[MainController::class,'create']);
+Route::post('/post_create',[MainController::class,'post_create']);

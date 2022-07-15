@@ -11,7 +11,7 @@
             <p class="card-text">{{$el->content}}</p>
         </div>
         <div class="card-footer">
-            <p class="card-text">{{$el->date_created}}</p>
+            <p class="card-text">{{$el->updated_at}}</p>
         </div>
         <a class="btn btn-danger" href="/posts/delete/?id={{$el->id}}">Удалить</a>
         <a class="btn btn-warning" href="/posts/edit/{{$el->id}}">Изменить</a>
