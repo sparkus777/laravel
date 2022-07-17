@@ -24,4 +24,27 @@ return view('posts', ['blog' => $blog->all()]);
         $message->save();
         return redirect()->route('posts');
     }
+    public function edit($id) {
+        $blog = new Posts();
+       return view('edit',['blog' => $blog->find($id)]);
+
+    }
+    public function update($id,Request $request)
+    {
+        $message = Posts::find($id);
+        $message->title = $request->input('title');
+        $message->content = $request->input('content');
+        $message->created_at = $request->input("");
+        $message->save();
+        return redirect()->route('posts');
+
+
+    }
+    public function delete($id) {
+        Posts::find($id)->delete();
+        return redirect()->route('posts');
+
+    }
+
+
 }

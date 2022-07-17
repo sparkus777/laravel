@@ -27,6 +27,10 @@ Route::get('/db', function () {
         echo 'None';
     }
 });
+
 Route::get('/posts',[MainController::class,'posts'])->name('posts');
 Route::get('/create',[MainController::class,'create']);
 Route::post('/post_create',[MainController::class,'post_create']);
+Route::get('/edit/{id}',[MainController::class,'edit'])->name('edit-one');
+Route::post('/edit/{id}',[MainController::class,'update'])->name('post-update');
+Route::get('/delete/{id}',[MainController::class,'delete'])->name('post-delete');

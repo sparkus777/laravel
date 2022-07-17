@@ -13,8 +13,8 @@
         <div class="card-footer">
             <p class="card-text">{{$el->updated_at}}</p>
         </div>
-        <a class="btn btn-danger" href="/posts/delete/?id={{$el->id}}">Удалить</a>
-        <a class="btn btn-warning" href="/posts/edit/{{$el->id}}">Изменить</a>
+        <a class="btn btn-danger" href="{{ route('post-delete', $el->id)}}">Удалить</a>
+        <a class="btn btn-warning" href="{{ route('edit-one', $el->id)}}">Изменить</a>
 
     </div>
 
