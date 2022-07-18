@@ -9,10 +9,10 @@
 <div class="navbar navbar-dark bg-dark shadow-sm">
     <div class="container d-flex">
         <div class="d-flex">
-            <a href="http://laravel.od/posts" class="navbar-brand d-flex">
+            <a href="{{route('posts')}}" class="navbar-brand d-flex">
                 <strong>Home</strong>
             </a>
-            <a href="/create" class="navbar-brand d-flex">
+            <a href="{{route('create')}}" class="navbar-brand d-flex">
                 <strong>Create</strong>
             </a>
         </div>

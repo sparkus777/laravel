@@ -15,14 +15,20 @@ return view('posts', ['blog' => $blog->all()]);
         return view('post_create');
 
     }
-    public function post_create(Request $request) {
+    public function store(Request $request) {
+        $valid = $request->validate([
+            'title' => 'required|min:4|max:100',
+            'content' => 'min:4|max:100'
+
+        ]);
+
         $message = new Posts();
         $message->title= $request->input('title');
         $message->content= $request->input('content');
         $message->created_at= $request->input("");
 
         $message->save();
-        return redirect()->route('posts');
+        return redirect()->route('posts')->with('success','Блог добавлен!');
     }
     public function edit($id) {
         $blog = new Posts();
@@ -31,6 +37,11 @@ return view('posts', ['blog' => $blog->all()]);
     }
     public function update($id,Request $request)
     {
+        $valid = $request->validate([
+            'title' => 'required|min:4|max:100',
+            'content' => 'min:4|max:100'
+
+        ]);
         $message = Posts::find($id);
         $message->title = $request->input('title');
         $message->content = $request->input('content');

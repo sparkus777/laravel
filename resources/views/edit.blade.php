@@ -1,10 +1,19 @@
 @extends('header')
 
-@section('title')edit post @endsection
+@section('title')Edit post @endsection
 
 @section('main_content')
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="container">
-        <form action="{{route('post-update',$blog->id)}}" method="POST">
+        <form action="{{route('update',$blog->id)}}" method="POST">
             @csrf
             <input type="hidden" name="id" value="{{$blog->id}}">
             <div class="mt-5">

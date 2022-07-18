@@ -1,8 +1,9 @@
 @extends('header')
 
-@section('title')main page @endsection
+@section('title')Main page @endsection
 
 @section('main_content')
+
 <div class="container">
     @foreach($blog as $el)
     <div class="card mt-5 25">
@@ -13,8 +14,8 @@
         <div class="card-footer">
             <p class="card-text">{{$el->updated_at}}</p>
         </div>
-        <a class="btn btn-danger" href="{{ route('post-delete', $el->id)}}">Удалить</a>
-        <a class="btn btn-warning" href="{{ route('edit-one', $el->id)}}">Изменить</a>
+        <a class="btn btn-danger" href="{{ route('delete', $el->id)}}">Удалить</a>
+        <a class="btn btn-warning" href="{{ route('edit', $el->id)}}">Изменить</a>
 
     </div>
 
