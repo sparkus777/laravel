@@ -7,18 +7,16 @@
 <div class="container">
     @foreach($blog as $el)
     <div class="card mt-5 25">
-        <a href="/posts/{{$el->id}}"><h5 class="card-header">{{$el->title}}</h5></a>
+        <h3 class="card-header">{{$el->title}}</h3>
         <div class="card-body">
             <p class="card-text">{{$el->content}}</p>
+            <p class="card-text" align="right">{{$el->updated_at}}</p>
         </div>
-        <div class="card-footer">
-            <p class="card-text">{{$el->updated_at}}</p>
-        </div>
-        <a class="btn btn-danger" href="{{ route('delete', $el->id)}}">Удалить</a>
-        <a class="btn btn-warning" href="{{ route('edit', $el->id)}}">Изменить</a>
-
     </div>
-
+    <div class="row mt-1">
+        <div class="col-md-1"><a class="btn btn-outline-dark btn-sm" href="{{ route('edit', $el->id)}}">Изменить</a></div>
+        <div class="col-md-1"><a class="btn btn-outline-danger btn-sm" href="{{ route('delete', $el->id)}}">Удалить</a></div>
+    </div>
     @endforeach
 </div>
 @endsection

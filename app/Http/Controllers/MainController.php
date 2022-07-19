@@ -56,6 +56,9 @@ return view('posts', ['blog' => $blog->all()]);
         return redirect()->route('posts');
 
     }
-
+    public function reg()
+    {
+        return view('reg');
+    }
 
 }
