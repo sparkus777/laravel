@@ -61,4 +61,9 @@ return view('posts', ['blog' => $blog->all()]);
         return view('reg');
     }
 
+    public function auth()
+    {
+        return view('auth');
+    }
+
 }

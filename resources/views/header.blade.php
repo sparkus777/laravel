@@ -20,6 +20,9 @@
             <a href="{{route('reg')}}" class="navbar-brand d-flex">
                 <strong>Registration</strong>
             </a>
+            <a href="{{route('auth')}}" class="navbar-brand d-flex">
+                <strong>Authorization</strong>
+            </a>
         </div>
     </div>
 </div>

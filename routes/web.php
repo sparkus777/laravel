@@ -9,4 +9,5 @@ Route::post('/post/store',[MainController::class,'store'])->name('store');
 Route::get('/edit/{id}',[MainController::class,'edit'])->name('edit');
 Route::post('/update/{id}',[MainController::class,'update'])->name('update');
 Route::get('/delete/{id}',[MainController::class,'delete'])->name('delete');
-Route::get('/registration',[MainController::class,'reg'])->name('reg');
+Route::post('/registration',[MainController::class,'reg'])->name('reg');
+Route::post('/authorization',[MainController::class,'auth'])->name('auth');
