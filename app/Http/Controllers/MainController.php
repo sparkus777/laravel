@@ -11,6 +11,10 @@ class MainController extends Controller
 return view('posts', ['blog' => $blog->all()]);
     }
 
+    public function main_page() {
+        return view('main_page');
+
+    }
     public function create() {
         return view('post_create');
 
@@ -56,14 +60,15 @@ return view('posts', ['blog' => $blog->all()]);
         return redirect()->route('posts');
 
     }
-    public function reg()
+    public function reg_page()
     {
         return view('reg');
     }
 
-    public function auth()
+    public function auth_page()
     {
         return view('auth');
     }
+
 
 }

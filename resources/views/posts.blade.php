@@ -1,6 +1,6 @@
 @extends('header')
 
-@section('title')Main page @endsection
+@section('title')all posts @endsection
 
 @section('main_content')
 
