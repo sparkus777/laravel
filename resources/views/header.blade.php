@@ -17,7 +17,7 @@
             <a href="{{route('create')}}" class="navbar-brand d-flex">
                 <strong>Create</strong>
             </a>
-            <a href="{{route('main_page')}}" class="navbar-brand d-flex">
+            <a href="{{route('logout')}}" class="navbar-brand d-flex">
                 <strong>log out</strong>
             </a>
         </div>

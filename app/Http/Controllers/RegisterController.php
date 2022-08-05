@@ -12,7 +12,9 @@ class RegisterController extends Controller
 {
     public function save(Request $request)
     {
-
+        if(Auth::check()){
+            return redirect(route('posts'));
+        }
         $validateFields = $request->validate([
             'name' => 'required|max:15',
             'password' => 'required'

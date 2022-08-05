@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Posts;
+use Illuminate\Support\Facades\Auth;
+
 class MainController extends Controller
 {
     public function posts() {
@@ -68,6 +70,11 @@ return view('posts', ['blog' => $blog->all()]);
     public function auth_page()
     {
         return view('auth');
+    }
+    public function logout()
+    {
+        Auth::logout();
+        return redirect(route('main_page'));
     }
 
 

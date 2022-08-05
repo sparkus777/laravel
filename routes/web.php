@@ -14,6 +14,6 @@ Route::get('/delete/{id}',[MainController::class,'delete'])->name('delete')->mid
 Route::get('/registration_page',[MainController::class,'reg_page'])->name('reg_page');
 Route::get('/authorization_page',[MainController::class,'auth_page'])->name('auth_page');
 Route::post('/registration',[\App\Http\Controllers\RegisterController::class,'save'])->name('registration');
-Route::post('/login',[MainController::class,'login'])->name('login');
-//Route::get('/logout',[MainController::class,'logout'])->name('logout');
+Route::post('/login',[\App\Http\Controllers\LoginController::class,'login'])->name('login');
+Route::get('/logout',[MainController::class,'logout'])->name('logout');
 
