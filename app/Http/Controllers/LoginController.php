@@ -12,12 +12,14 @@ class LoginController extends Controller
         if(Auth::check()){
             return redirect(route('posts'));
         }
-
+        $validateFields = $request->validate([
+            'name' => 'required',
+            'password' => 'required'
+        ]);
         $formFields = $request->only(['name','password']);
         if(Auth::attempt($formFields)){
             return redirect()->intended(route('posts'));
         }
-        return redirect(route('auth_page'))->withErrors([
-            'name' => 'oshibka']);
+
     }
 }
