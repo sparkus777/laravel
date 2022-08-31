@@ -3,7 +3,7 @@
 @section('title')all posts @endsection
 
 @section('main_content')
-
+@if(!$blog->isEmpty())
 <div class="container">
     @foreach($blog as $el)
     <div class="card mt-5 25">
@@ -19,4 +19,8 @@
     </div>
     @endforeach
 </div>
+@else
+    <a href="{{route('create')}}" class="navbar-brand d-flex">Blog is empty, create the new POST!</a>
+@endif
+
 @endsection
