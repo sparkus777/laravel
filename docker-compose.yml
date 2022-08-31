@@ -5,7 +5,7 @@ services:
         container_name: nginx
         volumes:
             - ./:/var/www
-            - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+            - ./docker/nginx/conf.d/:/etc/nginx/conf.d
         ports:
             - "81:80"
         depends_on:

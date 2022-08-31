@@ -3,8 +3,15 @@
 @section('title')Sign in @endsection
 
 @section('main_content')
-
-
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="container h-50">
         <div class="row d-flex justify-content-center align-items-center h-50">
             <div class="col-lg-7 col-xl-7">
