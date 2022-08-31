@@ -11,6 +11,7 @@
 <div class="navbar navbar-dark bg-dark shadow-sm">
     <div class="container d-flex">
         <div class="d-flex">
+            @if (!\Illuminate\Support\Facades\Auth::guest())
             <a href="{{route('main_page')}}" class="navbar-brand d-flex">
                 <strong>Home</strong>
             </a>
@@ -20,6 +21,15 @@
             <a href="{{route('logout')}}" class="navbar-brand d-flex">
                 <strong>log out</strong>
             </a>
+            @endif
+            @if (\Illuminate\Support\Facades\Auth::guest())
+                <a href="{{route('reg_page')}}" class="navbar-brand d-flex">
+                    <strong>Registration</strong>
+                </a>
+                <a href="{{route('auth_page')}}" class="navbar-brand d-flex">
+                        <strong>Authorization</strong>
+                </a>
+            @endif
         </div>
     </div>
 </div>
