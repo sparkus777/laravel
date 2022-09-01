@@ -32,7 +32,6 @@ return view('posts', ['blog' => $blog->all()]);
         $message->title= $request->input('title');
         $message->content= $request->input('content');
         $message->created_at= $request->input("");
-
         $message->save();
         return redirect()->route('posts')->with('success','Блог добавлен!');
     }
