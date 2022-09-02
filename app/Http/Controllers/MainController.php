@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Posts;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,9 @@ return view('posts', ['blog' => $blog->all()]);
         $message = new Posts();
         $message->title= $request->input('title');
         $message->content= $request->input('content');
-        $message->created_at= $request->input("");
+        $message->created_at= $request->input("created_at");
+        $message->updated_at= $request->input("updated_at");
+        $message->user_id= $request->input("1");
         $message->save();
         return redirect()->route('posts')->with('success','Блог добавлен!');
     }

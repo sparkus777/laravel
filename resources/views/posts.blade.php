@@ -10,7 +10,7 @@
         <h3 class="card-header">{{$el->title}}</h3>
         <div class="card-body">
             <p class="card-text">{{$el->content}}</p>
-            <p class="card-text" align="right">{{$el->updated_at}}</p>
+            <p class="card-text" align="right">{{$el->updated_at->locale('uk')->isoFOrmat('LLL')}}</p>
         </div>
     </div>
     <div class="row mt-1">
@@ -19,4 +19,9 @@
     </div>
     @endforeach
 </div>
+@else
+    <a href="{{route('create')}}" class="navbar-brand d-flex">
+        <strong>Blog is empty, create the new post</strong>
+    </a>
+@endif
 @endsection
