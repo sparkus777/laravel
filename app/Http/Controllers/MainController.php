@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Models\Posts;
+use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
 {
     public function posts() {
-        $blog = new Posts();
-return view('posts', ['blog' => $blog->all()]);
+        $posts = Post::all();
+        return view('posts', ['posts' => $posts]);
     }
 
     public function main_page() {
@@ -29,7 +29,7 @@ return view('posts', ['blog' => $blog->all()]);
 
         ]);
 
-        $message = new Posts();
+        $message = new Post();
         $message->title= $request->input('title');
         $message->content= $request->input('content');
         $message->user_id= $request->user()->id;
@@ -37,7 +37,7 @@ return view('posts', ['blog' => $blog->all()]);
         return redirect()->route('posts')->with('success','Блог добавлен!');
     }
     public function edit($id) {
-        $blog = new Posts();
+        $blog = new Post();
        return view('edit',['blog' => $blog->find($id)]);
 
     }
@@ -48,7 +48,7 @@ return view('posts', ['blog' => $blog->all()]);
             'content' => 'min:4|max:100'
 
         ]);
-        $message = Posts::find($id);
+        $message = Post::find($id);
         $message->title = $request->input('title');
         $message->content = $request->input('content');
         $message->save();
@@ -57,7 +57,7 @@ return view('posts', ['blog' => $blog->all()]);
 
     }
     public function delete($id) {
-        Posts::find($id)->delete();
+        Post::query()->find($id)->delete();
         return redirect()->route('posts');
 
     }

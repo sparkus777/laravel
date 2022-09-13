@@ -3,19 +3,22 @@
 @section('title')all posts @endsection
 
 @section('main_content')
-@if(!$blog->isEmpty())
+@if($posts->isNotEmpty())
 <div class="container">
-    @foreach($blog as $el)
+    @foreach($posts as $post)
     <div class="card mt-5 25">
-        <h3 class="card-header">{{$el->title}}</h3>
+        <div>
+            <h4 class="card-header">{{ $post->user()->get(['id', 'name'])->first()->name }}</h4>
+        </div>
+        <h3 class="card-header">{{$post->title}}</h3>
         <div class="card-body">
-            <p class="card-text">{{$el->content}}</p>
-            <p class="card-text" align="right">{{$el->updated_at->locale('uk')->isoFOrmat('LLL')}}</p>
+            <p class="card-text">{{$post->content}}</p>
+            <p class="card-text" align="right">{{$post->updated_at->locale('uk')->isoFOrmat('LLL')}}</p>
         </div>
     </div>
     <div class="row mt-1">
-        <div class="col-md-1"><a class="btn btn-outline-dark btn-sm" href="{{ route('edit', $el->id)}}">Изменить</a></div>
-        <div class="col-md-1"><a class="btn btn-outline-danger btn-sm" href="{{ route('delete', $el->id)}}">Удалить</a></div>
+        <div class="col-md-1"><a class="btn btn-outline-dark btn-sm" href="{{ route('edit', $post->id)}}">Изменить</a></div>
+        <div class="col-md-1"><a class="btn btn-outline-danger btn-sm" href="{{ route('delete', $post->id)}}">Удалить</a></div>
     </div>
     @endforeach
 </div>
