@@ -15,11 +15,18 @@
             <a href="{{route('main_page')}}" class="navbar-brand d-flex">
                 <strong>Home</strong>
             </a>
+
             <a href="{{route('create')}}" class="navbar-brand d-flex">
                 <strong>Create</strong>
             </a>
+                <a href="{{route('posts')}}" class="navbar-brand d-flex">
+                    <strong>All posts</strong>
+                </a>
             <a href="{{route('logout')}}" class="navbar-brand d-flex">
                 <strong>log out</strong>
+                <a href="{{route('main_page')}}" class="navbar-brand d-flex">
+                    <strong>{{\Illuminate\Support\Facades\Auth::user()->get()->name}}</strong>
+                </a>
             </a>
             @endif
             @if (\Illuminate\Support\Facades\Auth::guest())

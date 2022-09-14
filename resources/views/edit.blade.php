@@ -13,16 +13,16 @@
         </div>
     @endif
     <div class="container">
-        <form action="{{route('update',$blog->id)}}" method="POST">
+        <form action="{{route('update',$post->id)}}" method="POST">
             @csrf
-            <input type="hidden" name="id" value="{{$blog->id}}">
+            <input type="hidden" name="id" value="{{$post->id}}">
             <div class="mt-5">
                 <label class="form-label">Title</label>
-                <input name="title" type="text" class="form-control" value = "{{$blog->title}}">
+                <input name="title" type="text" class="form-control" value = "{{$post->title}}">
             </div>
             <div class="mt-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Content</label>
-                <textarea name="content" class="form-control" rows="3">{{$blog->content}}"</textarea>
+                <textarea name="content" class="form-control" rows="3">{{$post->content}}"</textarea>
             </div>
             <div class="mt-3">
                 <input class="btn btn-primary" type="submit" value="Change">

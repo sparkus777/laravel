@@ -15,18 +15,20 @@ class RegisterController extends Controller
         if(Auth::check()){
             return redirect(route('posts'));
         }
+
         $validateFields = $request->validate([
             'name' => 'required|max:15',
             'password' => 'required'
         ]);
+
         $user = User::create($validateFields);
         if($user){
             Auth::login($user);
             return redirect(route('posts'));
         }
+
         return redirect(route('reg_page'))->withErrors([
             'formError' => 'oshibka'
         ]);
-
     }
 }

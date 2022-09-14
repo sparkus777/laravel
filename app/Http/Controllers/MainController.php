@@ -1,16 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class MainController extends Controller
 {
-    public function posts() {
-        $posts = Post::all();
+    /**
+     * @return View
+     */
+    public function posts(): View
+    {
+        $posts = Post::query()->get();
+
         return view('posts', ['posts' => $posts]);
     }
 
@@ -18,48 +26,79 @@ class MainController extends Controller
         return view('main_page');
 
     }
+
     public function create() {
         return view('post_create');
 
     }
-    public function store(Request $request) {
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function store(Request $request): RedirectResponse
+    {
         $valid = $request->validate([
             'title' => 'required|min:4|max:100',
             'content' => 'min:4|max:100'
-
         ]);
 
         $message = new Post();
         $message->title= $request->input('title');
         $message->content= $request->input('content');
         $message->user_id= $request->user()->id;
+
         $message->save();
+
         return redirect()->route('posts')->with('success','Блог добавлен!');
     }
-    public function edit($id) {
-        $blog = new Post();
-       return view('edit',['blog' => $blog->find($id)]);
+
+    public function edit($id)
+    {
+        $post = Post::query()
+            ->where('user_id', Auth::id())
+            ->find($id);
+
+        if ($post === null) {
+            return back()->withErrors(['You can`t edit this post']);
+        }
+        $post = new Post();
+       return view('edit',['post' => $post->find($id)]);
 
     }
-    public function update($id,Request $request)
+
+    /**
+     * @param string $id
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function update(string $id, Request $request): RedirectResponse
     {
         $valid = $request->validate([
             'title' => 'required|min:4|max:100',
             'content' => 'min:4|max:100'
-
         ]);
-        $message = Post::find($id);
-        $message->title = $request->input('title');
-        $message->content = $request->input('content');
-        $message->save();
-        return redirect()->route('posts');
 
+        $post = Post::find($id);
 
+        $post->title = $request->input('title');
+        $post->content = $request->input('content');
+        $post->save();
+
+        return redirect()->route('posts', ['post' => $post]);
     }
-    public function delete($id) {
+
+    public function delete( string $id) {
+        $post = Post::query()
+            ->where('user_id', Auth::id())
+            ->find($id);
+
+        if ($post === null) {
+            return back()->withErrors(['You can`t delete this post']);
+        }
+
         Post::query()->find($id)->delete();
         return redirect()->route('posts');
-
     }
     public function reg_page()
     {
@@ -70,6 +109,7 @@ class MainController extends Controller
     {
         return view('auth');
     }
+
     public function logout()
     {
         Auth::logout();

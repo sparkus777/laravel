@@ -3,6 +3,15 @@
 @section('title')all posts @endsection
 
 @section('main_content')
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 @if($posts->isNotEmpty())
 <div class="container">
     @foreach($posts as $post)

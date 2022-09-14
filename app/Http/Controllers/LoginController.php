@@ -20,6 +20,11 @@ class LoginController extends Controller
         if(Auth::attempt($formFields)){
             return redirect()->intended(route('posts'));
         }
+        else {
+            return back()->withErrors([
+                'Login or password is incorrect'
+            ]);
+        }
 
     }
 }
