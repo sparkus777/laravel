@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Post;
@@ -17,43 +18,42 @@ class MainController extends Controller
      */
     public function posts(): View
     {
-        $posts = Post::query()->get();
+        $posts = Post::query()->latest()->get();
 
         return view('posts', ['posts' => $posts]);
     }
 
-    public function main_page() {
+    public function main_page(): View {
         return view('main_page');
 
     }
 
-    public function create() {
+    public function create(): View {
         return view('post_create');
 
     }
 
     /**
-     * @param Request $request
+     * @param StorePostRequest $request
      * @return RedirectResponse
      */
-    public function store(Request $request): RedirectResponse
+    public function store(StorePostRequest $request): RedirectResponse
     {
-        $valid = $request->validate([
-            'title' => 'required|min:4|max:100',
-            'content' => 'min:4|max:100'
-        ]);
-
         $message = new Post();
-        $message->title= $request->input('title');
-        $message->content= $request->input('content');
-        $message->user_id= $request->user()->id;
+        $message->title = $request->input('title');
+        $message->content = $request->input('content');
+        $message->user_id = $request->user()->id;
 
         $message->save();
 
-        return redirect()->route('posts')->with('success','Блог добавлен!');
+        return redirect()->route('posts')->with('success', __('auth.failed'));
     }
 
-    public function edit($id)
+    /**
+     * @param int $id
+     * @return RedirectResponse|View
+     */
+    public function edit(int $id): RedirectResponse|View
     {
         $post = Post::query()
             ->where('user_id', Auth::id())
@@ -62,9 +62,8 @@ class MainController extends Controller
         if ($post === null) {
             return back()->withErrors(['You can`t edit this post']);
         }
-        $post = new Post();
-       return view('edit',['post' => $post->find($id)]);
 
+        return view('edit',['post' => $post]);
     }
 
     /**
@@ -74,21 +73,27 @@ class MainController extends Controller
      */
     public function update(string $id, Request $request): RedirectResponse
     {
-        $valid = $request->validate([
+        $validData = $request->validate([
             'title' => 'required|min:4|max:100',
             'content' => 'min:4|max:100'
         ]);
 
-        $post = Post::find($id);
+        $post = Post::query()
+            ->where('user_id', Auth::id())
+            ->find($id);
 
-        $post->title = $request->input('title');
-        $post->content = $request->input('content');
+        if ($post === null) {
+            return back()->withErrors(['You can`t edit this post']);
+        }
+
+        $post->title = $validData['title'];
+        $post->content = $validData['content'];
         $post->save();
 
         return redirect()->route('posts', ['post' => $post]);
     }
 
-    public function delete( string $id) {
+    public function delete( string $id): RedirectResponse|View {
         $post = Post::query()
             ->where('user_id', Auth::id())
             ->find($id);
@@ -100,17 +105,17 @@ class MainController extends Controller
         Post::query()->find($id)->delete();
         return redirect()->route('posts');
     }
-    public function reg_page()
+    public function reg_page(): View
     {
         return view('reg');
     }
 
-    public function auth_page()
+    public function auth_page(): View
     {
         return view('auth');
     }
 
-    public function logout()
+    public function logout(): RedirectResponse
     {
         Auth::logout();
         return redirect(route('main_page'));

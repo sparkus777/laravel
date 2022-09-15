@@ -24,10 +24,10 @@
                 </a>
             <a href="{{route('logout')}}" class="navbar-brand d-flex">
                 <strong>log out</strong>
-                <a href="{{route('main_page')}}" class="navbar-brand d-flex">
-                    <strong>{{\Illuminate\Support\Facades\Auth::user()->get()->name}}</strong>
-                </a>
             </a>
+                <a href="" class="navbar-brand d-flex">
+                    <h3> <strong>{{\Illuminate\Support\Facades\Auth::user()->name}}</strong></h3>
+                </a>
             @endif
             @if (\Illuminate\Support\Facades\Auth::guest())
                 <a href="{{route('reg_page')}}" class="navbar-brand d-flex">

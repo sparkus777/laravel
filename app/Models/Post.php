@@ -10,11 +10,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property string $title
  * @property string $content
+ * @property int $user_id
  * @method static Builder|Post query()
  */
 class Post extends Model
 {
     use HasFactory;
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
